@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>島宇手作 | 尋找妳的專屬命定能量守護</title>
+    <style>
+        /* 核心世界觀視覺與配色：沉穩大地色與森林深綠 */
+        :root {
+            --bg-gradient: linear-gradient(135deg, #2D3A34 0%, #1A2420 100%); /* 森林深綠 */
+            --earth-taupe: #8C7A6B; /* 大地色 */
+            --earth-light: #F4F1EA; /* 淺色文青背景 */
+            --text-dark: #2C3531;
+            --text-light: #FFFFFF;
+            --accent-gold: #D4AF37; /* 14K金 */
+            --accent-silver: #C0C0C0; /* 925純銀 */
+            --accent-green: #4E6E5D; /* 綠幽靈/阿寶款 */
+            --shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: "PingFang TC", "Microsoft JhengHei", sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--earth-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* Hero Section 首屏視覺 */
+        .hero {
+            background: var(--bg-gradient);
+            color: var(--text-light);
+            padding: 100px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle, rgba(212,175,55,0.05) 0%, rgba(0,0,0,0) 70%);
+            pointer-events: none;
+        }
+
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+            font-weight: 500;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 40px;
+            color: #D1D7D5;
+            font-weight: 300;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            background-color: var(--earth-taupe);
+            color: var(--text-light);
+            padding: 15px 40px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-btn:hover {
+            background-color: #766558;
+            transform: translateY(-3px);
+        }
+
+        /* 痛點共鳴 Section */
+        .pain-point {
+            padding: 80px 20px;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .pain-point h2 {
+            font-size: 2rem;
+            color: var(--accent-green);
+            margin-bottom: 30px;
+        }
+
+        .pain-point p {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        .quote {
+            font-style: italic;
+            border-left: 4px solid var(--earth-taupe);
+            padding-left: 20px;
+            text-align: left;
+            margin: 30px auto;
+            max-width: 600px;
+            color: var(--text-dark);
+        }
+
+        /* 三方案卡片 Section */
+        .products-section {
+            padding: 80px 20px;
+            background-color: #EAE6DF;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 50px;
+            color: var(--text-dark);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 40px 30px;
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+        }
+
+        .card.popular {
+            border: 2px solid var(--earth-taupe);
+        }
+
+        .badge {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--earth-taupe);
+            color: white;
+            padding: 5px 20px;
+            border-radius: 15px;
+            font-size: 0.9rem;
+        }
+
+        .level-tag {
+            font-size: 0.9rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            display: inline-block;
+        }
+
+        .tag-low { color: var(--accent-green); }
+        .tag-mid { color: #D48837; }
+        .tag-high { color: #A64B4B; }
+
+        .prod-name {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: var(--text-dark);
+        }
+
+        .price {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--text-dark);
+            margin-bottom: 20px;
+        }
+
+        .details-list {
+            list-style: none;
+            margin-bottom: 30px;
+            font-size: 0.95rem;
+            color: #555;
+        }
+
+        .details-list li {
+            margin-bottom: 12px;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .details-list li::before {
+            content: '✦';
+            position: absolute;
+            left: 0;
+            color: var(--earth-taupe);
+        }
+
+        .card-btn {
+            display: block;
+            text-align: center;
+            padding: 12px;
+            background: #F4F1EA;
+            color: var(--text-dark);
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .card.popular .card-btn {
+            background: var(--bg-gradient);
+            color: white;
+        }
+
+        .card-btn:hover {
+            opacity: 0.9;
+        }
+
+        /* 免責與承諾聲明 */
+        .disclaimer {
+            max-width: 800px;
+            margin: 60px auto;
+            padding: 30px;
+            background: #FFF;
+            border-radius: 15px;
+            border-left: 5px solid #A64B4B;
+            font-size: 0.95rem;
+            color: #666;
+        }
+
+        /* 預約表單 Section */
+        .form-section {
+            padding: 80px 20px;
+            background: var(--bg-gradient);
+            color: white;
+        }
+
+        .form-container {
+            max-width: 650px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.08);
+            padding: 50px 40px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+        }
+
+        .form-container h2 {
+            text-align: center;
+            margin-bottom: 10px;
+            font-weight: 400;
+            letter-spacing: 1px;
+        }
+
+        .form-container p.subtitle {
+            text-align: center;
+            color: #B2C0B9;
+            margin-bottom: 40px;
+            font-size: 0.95rem;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.95rem;
+            color: #E1E7E4;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.05);
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent-gold);
+            background: rgba(255,255,255,0.12);
+        }
+
+        .form-control option {
+            background: #1A2420;
+            color: white;
+        }
+
+        textarea.form-control {
+            resize: vertical;
+        }
+
+        .radio-group, .checkbox-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            background: rgba(0,0,0,0.1);
+            padding: 15px;
+            border-radius: 8px;
+        }
+
+        .radio-item, .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: var(--earth-taupe);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s;
+            margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        .submit-btn:hover {
+            background: #766558;
+        }
+
+        #abao-addon {
+            display: none; /* 預設隱藏，選擇阿寶款時透過JS開啟 */
+            animation: fadeIn 0.4s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        footer {
+            background: #111815;
+            color: #666;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .form-container { padding: 30px 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <section class="hero">
+        <h1>在喧囂的城市裡，為妳的靈魂點亮一盞回家的燈</h1>
+        <p>2026 現代人的情緒寄託所——【島宇手作】。這不只是冷冰冰的礦石，而是一份專屬於妳的溫慢陪伴與能量修復。</p>
+        <a href="#booking-form" class="cta-btn">尋找我的專屬守護能量</a>
+    </section>
+
+    <section class="pain-point">
+        <h2>妳是不是也累了？</h2>
+        <p>每天扮演著稱職的角色，卻在深夜卸下防備時，感到莫名的焦慮、內耗與失眠？</p>
+        <p>覺得生活卡關、節奏快到無法呼吸，渴望一處能安放情緒的避難所？</p>
+        <div class="quote">
+            「島主毓儀想對妳說：妳已經撐很久了，有點累但還在忍對嗎？來到島宇，讓守護神獸與持咒水晶，陪妳一起慢下來。」
+        </div>
+    </section>
+
+    <section class="products-section">
+        <h2 class="section-title">選擇妳的專屬命定能量方案</h2>
+        <div class="grid">
+            
+            <div class="card">
+                <div>
+                    <span class="level-tag tag-low">🟢 體驗破冰級</span>
+                    <h3 class="prod-name">【阿寶的綠意慢活】能量守護手鍊</h3>
+                    <div class="price">NT$ 880</div>
+                    <ul class="details-list">
+                        <li><strong>水晶配置：</strong>綠幽靈(10mm)、葡萄石(8mm)、白水晶(8mm)、黃銅復古隔珠 (共23顆)</li>
+                        <li><strong>核心功效：</strong>主打心輪與頂輪修復。穩固正財磁場、舒緩日常焦慮、過濾環境負能量</li>
+                        <li><strong>佩戴方式：</strong>左手（吸納溫柔療癒能量）</li>
+                        <li><strong>淨化方法：</strong>清水沖洗3-5分鐘，或早晨溫和陽光微曬1小時</li>
+                        <li><strong>限定服務：</strong>可自由加購「生命靈數單題諮詢(+$300)」</li>
+                    </ul>
+                </div>
+                <a href="#booking-form" class="card-btn" onclick="selectPlan('abao')">選擇阿寶的慢活能量</a>
+            </div>
+
+            <div class="card popular">
+                <div class="badge">🔥 熱銷推薦</div>
+                <div>
+                    <span class="level-tag tag-mid">🟡 深度留存級</span>
+                    <h3 class="prod-name">【波卡的破曉曙光】自信重建手鍊</h3>
+                    <div class="price">NT$ 1,580</div>
+                    <ul class="details-list">
+                        <li><strong>水晶配置：</strong>金髮晶(10mm)、黃水晶(8mm)、黑曜石(8mm)、925純銀幾何隔珠 (共21顆)</li>
+                        <li><strong>核心功效：</strong>激活海底輪與太陽神經叢。防護職場小人、注入自信心、招財運與行動力</li>
+                        <li><strong>佩戴方式：</strong>右手（左進右出特性，有效排出體內負能量）</li>
+                        <li><strong>淨化方法：</strong>聖木或鼠尾草煙燻1-2分鐘（避暴曬防褪色）</li>
+                        <li><strong>包含服務：</strong>內含「生命靈數單題諮詢」+ 能量微調服務</li>
+                    </ul>
+                </div>
+                <a href="#booking-form" class="card-btn" onclick="selectPlan('boca')">體驗波卡的自信曙光</a>
+            </div>
+
+            <div class="card">
+                <div>
+                    <span class="level-tag tag-high">🔴 高端頂級變現級</span>
+                    <h3 class="prod-name">【點點的靈魂星宇】高階深層覺察手鍊</h3>
+                    <div class="price">NT$ 3,280</div>
+                    <ul class="details-list">
+                        <li><strong>水晶配置：</strong>頂級超七(12mm)、拉長石(8mm藍綠光)、藍磷灰(8mm)、14K包金奢華配件 (共24顆)</li>
+                        <li><strong>核心功效：</strong>全脈輪深度覺醒。放大磁場提升全方位運勢、深度療癒內耗、釋放疲憊、喚醒直覺</li>
+                        <li><strong>佩戴方式：</strong>左手（全面吸納高頻宇宙靈性能量）</li>
+                        <li><strong>淨化方法：</strong>白水晶簇靜置24小時，或由島主在工作室進行深度持咒淨化</li>
+                        <li><strong>尊榮服務：</strong>內含「一對一生命靈數全盤深度解析(30-40分鐘)」+ 多維度諮詢</li>
+                    </ul>
+                </div>
+                <a href="#booking-form" class="card-btn" onclick="selectPlan('diandian')">開啟點點的靈魂覺察</a>
+            </div>
+
+        </div>
+
+        <div class="disclaimer">
+            <strong>島宇的溫暖承諾：</strong><br>
+            生命靈數與神獸指引旨在引導自我覺察、補足脈輪空缺。島宇不提供醫療與絕對宿命預測。妳的靈魂擁有最高的主權，水晶與島主將永遠站在陪伴與祝福的立場支持妳。手鍊均為手工客製，好能量值得妳與導師一起溫暖靜候。
+        </div>
+    </section>
+
+    <section class="form-section" id="booking-form">
+        <div class="form-container">
+            <h2>預約妳的命定能量</h2>
+            <p class="subtitle">移居島民計畫 — 填寫表單開啟妳的能量旅程</p>
+            
+            <form id="landing-form" onsubmit="handleSubmit(event)">
+                <div class="form-group">
+                    <label for="username">1. 移居島民姓名 *</label>
+                    <input type="text" id="username" class="form-control" placeholder="請輸入您的真實姓名 / 暱稱" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">2. 聯絡電話 *</label>
+                    <input type="tel" id="phone" class="form-control" placeholder="請輸入手機號碼，以便出貨及聯繫" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="lineid">3. LINE ID *</label>
+                    <input type="text" id="lineid" class="form-control" placeholder="請輸入 LINE ID，用於後續命理諮詢連繫" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="birthday">4. 靈魂解碼生日 *</label>
+                    <input type="date" id="birthday" class="form-control" required>
+                </div>
+
+                <div class="form-group">
+                    <label>5. 精準測量手圍 (cm) *</label>
+                    <div class="radio-group">
+                        <label class="radio-item"><input type="radio" name="wrist" value="14cm"> 14cm 偏細手圍</label>
+                        <label class="radio-item"><input type="radio" name="wrist" value="15cm" checked> 15cm 標準手圍 (預設設計)</label>
+                        <label class="radio-item"><input type="radio" name="wrist" value="16cm"> 16cm 略寬手圍</label>
+                        <label class="radio-item"><input type="radio" name="wrist" value="custom"> 其他特製手圍 (請於下方備註註明)</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="plan-select">6. 欲邀請的命定方案 *</label>
+                    <select id="plan-select" class="form-control" onchange="toggleAddon()" required>
+                        <option value="">-- 請選擇一項命定手鍊 --</option>
+                        <option value="abao">🟢 體驗破冰款：【阿寶的綠意慢活】能量手鍊 ($880)</option>
+                        <option value="boca">🟡 深度留存款：【波卡的破曉曙光】自信重建套組 ($1,580) - 內含諮詢</option>
+                        <option value="diandian">🔴 高端頂級款：【點點的靈魂星宇】尊榮全套 ($3,280) - 內含全盤解析</option>
+                    </select>
+                </div>
+
+                <div class="form-group" id="abao-addon">
+                    <label>7. 【阿寶款專屬】是否升級加購生命靈數單題諮詢？</label>
+                    <div class="radio-group">
+                        <label class="radio-item"><input type="radio" name="addon-choice" value="no" checked> 不加購，單純邀請手鍊 ($880)</label>
+                        <label class="radio-item"><input type="radio" name="addon-choice" value="yes"> 加購：生命靈數單題諮詢 (+$300)</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>8. 您目前最想改善的情緒卡點或願望？ (複選)</label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-item"><input type="checkbox" name="desire" value="anxiety"> 減少焦慮精神內耗、改善失眠</label>
+                        <label class="checkbox-item"><input type="checkbox" name="confidence"> 增強職場自信心、防小人</label>
+                        <label class="checkbox-item"><input type="checkbox" name="wealth"> 招正財、提升業務與行動力</label>
+                        <label class="checkbox-item"><input type="checkbox" name="spiritual"> 尋求深層靈性覺察與直覺智慧</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="note">9. 備註 / 想對島主毓儀說的話</label>
+                    <textarea id="note" id="note" class="form-control" rows="3" placeholder="請輸入您想特別說明的特殊需求或手圍調整細節..."></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">🔘 送出表單，開啟我的島民能量旅程</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 島宇手作 Island Space Handmade. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        // 當使用者點擊卡片的按鈕時，自動幫表單填入對應的下拉選單項目
+        function selectPlan(planValue) {
+            const selectElement = document.getElementById('plan-select');
+            if (selectElement) {
+                selectElement.value = planValue;
+                toggleAddon();
+            }
+        }
+
+        // 偵測是否選中阿寶款，動態顯示/隱藏加購選項
+        function toggleAddon() {
+            const selectElement = document.getElementById('plan-select');
+            const addonSection = document.getElementById('abao-addon');
+            
+            if (selectElement && addonSection) {
+                if (selectElement.value === 'abao') {
+                    addonSection.style.display = 'block';
+                } else {
+                    addonSection.style.display = 'none';
+                }
+            }
+        }
+
+        // 表單送出後的模擬處理（可連接至 LINE OA 或 後端 API）
+        function handleSubmit(event) {
+            event.preventDefault(); // 防止網頁重整
+            
+            const name = document.getElementById('username').value;
+            const plan = document.getElementById('plan-select').value;
+            
+            let planText = "未選擇款式";
+            if(plan === 'abao') planText = "【阿寶的綠意慢活】";
+            if(plan === 'boca') planText = "【波卡的破曉曙光】";
+            if(plan === 'diandian') planText = "【點點的靈魂星宇】";
+
+            alert("感謝 " + name + " 移居島宇！\n妳已成功送出 " + planText + " 命定手鍊預約。\n系統即將帶妳前往【島宇手作 LINE OA】進行身份核對與預約確認。");
+            
+            // 💡 提示：請在這裡將下方網址替換成妳島宇手作真實的 LINE OA 連結
+            // 例如：https://lin.ee/xxxxxxx
+            window.location.href = "https://line.me/R/ti/p/@your_line_oa_id"; 
+        }
+    </script>
+</body>
+</html>
